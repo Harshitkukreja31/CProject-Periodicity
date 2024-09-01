@@ -15,6 +15,14 @@ typedef struct {
     char name[50];
     int atomic_number;
     float atomic_weight;
+    int periodNo;
+    int groupNo;
+    int ionizationEnergy;
+    float electronegativity;
+    int electronAffinity;
+    int atomicRadius;
+    int meltingPoint;
+    int boilingPoint;
 } Element;
 
 // Define the PeriodicTable structure
@@ -30,6 +38,13 @@ void free_periodic_table(PeriodicTable* pt);
 Element* pt_get_by_symbol(PeriodicTable* pt, const char* symbol);
 Element* pt_get_by_name(PeriodicTable* pt, const char* name);
 Element* pt_get_by_atomic_number(PeriodicTable* pt, int atomic_number);
+
+void pt_insert_element(PeriodicTable* pt, Element* element);
+
+// Declare to_lowercase as an external function
+char* to_lowercase(const char* str);
+
+
 
 #endif // PERIODIC_TABLE_H
 
