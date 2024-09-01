@@ -62,11 +62,33 @@ PeriodicTable* read_elements_from_csv(const char* filename) {
         token = strtok(NULL, ",");
         element->atomic_weight = atof(trim_whitespace(token));
 
-        
+        token = strtok(NULL, ",");
+        element->periodNo = atoi(trim_whitespace(token));
+
+        token = strtok(NULL, ",");
+        element->groupNo = atoi(trim_whitespace(token));
+
+        token = strtok(NULL, ",");
+        element->ionizationEnergy = atoi(trim_whitespace(token));
+
+        token = strtok(NULL, ",");
+        element->electronegativity = atof(trim_whitespace(token));
+
+        token = strtok(NULL, ",");
+        element->electronAffinity = atoi(trim_whitespace(token));
+
+        token = strtok(NULL, ",");
+        element->atomicRadius = atoi(trim_whitespace(token));
+
+        token = strtok(NULL, ",");
+        element->meltingPoint = atoi(trim_whitespace(token));
+
+        token = strtok(NULL, ",");
+        element->boilingPoint = atoi(trim_whitespace(token));
 
         
         // Debugging line
-        printf("Adding element: %s, %s, %d, %.4f\n", element->symbol, element->name, element->atomic_number, element->atomic_weight);
+        printf("Adding element: %s, %s, %d, %.4f, %d, %d, %.2f\n", element->symbol, element->name, element->atomic_number, element->atomic_weight,element->periodNo,element->groupNo,element->electronegativity);
 
         // Use the new pt_insert_element function to add the element to the periodic table
         pt_insert_element(pt, element);
