@@ -9,6 +9,8 @@
 
 #include "hashtable.h"
 
+
+
 // Define the Element structure
 typedef struct {
     char symbol[3];
@@ -44,6 +46,9 @@ void pt_insert_element(PeriodicTable* pt, Element* element);
 // Declare to_lowercase as an external function
 char* to_lowercase(const char* str);
 
+
+
+void print_periodic_table(PeriodicTable* pt);
 
 
 #endif // PERIODIC_TABLE_H
