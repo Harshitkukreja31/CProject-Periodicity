@@ -44,16 +44,18 @@ int main() {
     
     while (1) {
         printf("\nMenu Options:\n");
-        printf("1. Print entire Periodic Table\n");
-        printf("2. Search by Symbol\n");
+        printf("1. Print Entire periodic table\n");
+        printf("2. Search by Full Symbole\n");
         printf("3. Search by Full Name\n");
         printf("4. Search by Atomic Number\n");
-        printf("5. Quit\n");
+        printf("5. Analyze Specific Trend\n");
+        printf("6. Analyze All Trends\n");
+        printf("7. Quit\n");
         int choice;
         printf("Enter choice: ");
         scanf("%d", &choice);
         
-        if (choice == 5) {
+        if (choice == 7) {
             break;
         }
         if(choice==1){
@@ -97,6 +99,38 @@ int main() {
                 printf("Element not found.\n");
             }
         }
+
+        else if (choice == 5) {
+            int start, end, property_choice;
+            printf("Enter range of atomic numbers (start end): ");
+            scanf("%d %d", &start, &end);
+            
+            printf("Choose property to analyze:\n");
+            printf("1. Electronegativity\n2. Electron Affinity\n3. Atomic Radius\n");
+            printf("4. Melting Point\n5. Boiling Point\n6. Ionization Energy\n");
+            printf("Enter choice: ");
+            scanf("%d", &property_choice);
+            
+            int property_index = property_choice - 1;
+            
+            int count;
+            Element** elements = pt_get_elements_sorted_by_property(pt, start, end, &count, property_index);
+            
+            if (elements) {
+                pt_analyze_trend(elements, count, property_index);
+                free(elements);
+            } else {
+                printf("Failed to analyze trend.\n");
+            }
+        }
+        else if (choice == 6) {
+            int start, end;
+            printf("Enter range of atomic numbers (start end): ");
+            scanf("%d %d", &start, &end);
+            
+            pt_analyze_all_trends(pt, start, end);
+        }
+        
 
 
         else {
