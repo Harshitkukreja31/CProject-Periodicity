@@ -11,6 +11,7 @@
 // Function to convert a string to lowercase
 char* to_lowercase(const char* str) {
     char* lower_str = strdup(str);
+    if (!lower_str) return NULL; // Check for memory allocation failure
     for (int i = 0; lower_str[i]; i++) {
         lower_str[i] = tolower((unsigned char)lower_str[i]);
     }
@@ -19,9 +20,14 @@ char* to_lowercase(const char* str) {
 
 PeriodicTable* create_periodic_table() {
     PeriodicTable* pt = (PeriodicTable*)malloc(sizeof(PeriodicTable));
+    if (!pt) return NULL;
     pt->symbolTable = ht_create(128);
     pt->nameTable = ht_create(128);
     pt->atomicTable = ht_create(128);
+    if (!pt->symbolTable || !pt->nameTable || !pt->atomicTable) {
+        free_periodic_table(pt);  // Free everything if any allocation failed
+        return NULL;
+    }
     return pt;
 }
 
@@ -35,6 +41,7 @@ void free_periodic_table(PeriodicTable* pt) {
 
 Element* pt_get_by_symbol(PeriodicTable* pt, const char* symbol) {
     char* lower_symbol = to_lowercase(symbol);
+    if (!lower_symbol) return NULL;
     Element* element = (Element*)ht_get(pt->symbolTable, lower_symbol);
     free(lower_symbol);
     return element;
@@ -42,6 +49,7 @@ Element* pt_get_by_symbol(PeriodicTable* pt, const char* symbol) {
 
 Element* pt_get_by_name(PeriodicTable* pt, const char* name) {
     char* lower_name = to_lowercase(name);
+    if (!lower_name) return NULL; 
     Element* element = (Element*)ht_get(pt->nameTable, lower_name);
     free(lower_name);
     return element;
@@ -56,9 +64,11 @@ void pt_insert_element(PeriodicTable* pt, Element* element) {
     char* lower_symbol = to_lowercase(element->symbol);
     char* lower_name = to_lowercase(element->name);
     
-    ht_insert(pt->symbolTable, lower_symbol, element);
-    ht_insert(pt->nameTable, lower_name, element);
-    ht_insert_by_atomic_number(pt->atomicTable, element->atomic_number, element);
+    if (lower_symbol && lower_name) {
+        ht_insert(pt->symbolTable, lower_symbol, element);
+        ht_insert(pt->nameTable, lower_name, element);
+        ht_insert_by_atomic_number(pt->atomicTable, element->atomic_number, element);
+    }
     
     free(lower_symbol);
     free(lower_name);
