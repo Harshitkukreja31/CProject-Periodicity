@@ -22,11 +22,7 @@ This project is a comprehensive C implementation of a periodic table of elements
 - **Interactive Menu**: User-friendly command-line interface.
 
 ## How It Works
-1. **Data Loading**: Element data is read from a CSV file and stored in a hash table for efficient access.
-2. **User Interaction**: The program presents a menu-driven interface for users to choose various operations.
-3. **Search Functionality**: Utilizes hash table lookups for fast element retrieval.
-4. **Trend Analysis**: Implements algorithms to analyze and compare element properties across specified ranges.
-5. **Visualization**: Uses plotting functions to create visual representations of analyzed trends.
+![Alt text](image/flowchart.png)
 
 ## File Structure
 ```
