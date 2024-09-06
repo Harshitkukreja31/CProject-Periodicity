@@ -2,7 +2,17 @@
 
 Welcome to the Periodic Elements Explorer - a powerful C-based tool for chemistry enthusiasts and students alike!
 
-
+## Table of Contents
+1. [Overview](#overview)
+2. [Features](#-features)
+3. [How It Works](#how-it-works)
+4. [File Structure](#file-structure)
+5. [Getting Started](#getting-started)
+   - [For Unix-like systems (Linux, macOS)](#for-unix-like-systems-linux-macos)
+   - [For Windows](#for-windows)
+6. [Usage](#usage)
+7. [Performance](#performance)
+8. [Future Scope](#future-scope)
 
 ## Overview
 This project is a comprehensive C implementation of a periodic table of elements. It provides an interactive interface for exploring element data, analyzing trends, and visualizing chemical properties. The application uses efficient data structures and algorithms to ensure fast lookups and responsive analysis.
