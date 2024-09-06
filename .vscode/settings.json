@@ -1,5 +1,13 @@
+
 {
     "git.ignoreLimitWarning": true,
     "C_Cpp.errorSquiggles": "disabled",
-    "C_Cpp.default.compilerPath": "C:/MinGW/bin"
+    "C_Cpp.default.compilerPath": "C:/MinGW/bin/gcc.exe",
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/include"
+    ],
+    "C_Cpp.default.cStandard": "c11",
+    "files.associations": {
+        "*.h": "c"
+    }
 }

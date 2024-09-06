@@ -1,3 +1,4 @@
+
 {
     "version": "2.0.0",
     "tasks": [
@@ -22,6 +23,44 @@
             "group": {
                 "kind": "build",
                 "isDefault": true
+            }
+        },
+        {
+            "type": "shell",
+            "label": "gcc build tests",
+            "command": "gcc",
+            "args": [
+                "-Wall",
+                "-Wextra",
+                "-I${workspaceFolder}/include",
+                "${workspaceFolder}/src/csvReader.c",
+                "${workspaceFolder}/src/periodictable.c",
+                "${workspaceFolder}/src/hashtable.c",
+                "${workspaceFolder}/src/plotFunctions.c",
+                "${workspaceFolder}/src/trends.c",
+                "${workspaceFolder}/tests/test_main.c",
+                "-o",
+                "${workspaceFolder}/bin/run_tests"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        }
+        ,
+        {
+            "type": "shell",
+            "label": "run tests",
+            "command": "${workspaceFolder}/bin/run_tests",
+            "group": {
+                "kind": "test",
+                "isDefault": false
             }
         }
     ]
