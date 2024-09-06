@@ -27,7 +27,7 @@ void printProp(Element* element){
     printf("Boiling Point: %d\n", element->boilingPoint);
 }
 
-
+#ifndef TESTING
 int main() {
     PeriodicTable* pt = read_elements_from_csv("data.csv");
    
@@ -50,12 +50,13 @@ int main() {
         printf("4. Search by Atomic Number\n");
         printf("5. Analyze Specific Trend\n");
         printf("6. Analyze All Trends\n");
-        printf("7. Quit\n");
+        printf("7. Plot Specific Trend\n");
+        printf("8. Quit\n");
         int choice;
         printf("Enter choice: ");
         scanf("%d", &choice);
         
-        if (choice == 7) {
+        if (choice == 8) {
             break;
         }
         if(choice==1){
@@ -104,33 +105,78 @@ int main() {
             int start, end, property_choice;
             printf("Enter range of atomic numbers (start end): ");
             scanf("%d %d", &start, &end);
-            
-            printf("Choose property to analyze:\n");
-            printf("1. Electronegativity\n2. Electron Affinity\n3. Atomic Radius\n");
-            printf("4. Melting Point\n5. Boiling Point\n6. Ionization Energy\n");
-            printf("Enter choice: ");
-            scanf("%d", &property_choice);
-            
-            int property_index = property_choice - 1;
-            
-            int count;
-            Element** elements = pt_get_elements_sorted_by_property(pt, start, end, &count, property_index);
-            
-            if (elements) {
-                pt_analyze_trend(elements, count, property_index);
-                free(elements);
-            } else {
-                printf("Failed to analyze trend.\n");
+            if(start < 0 || start >118 || end<0 || end>118){
+                printf("Invalid Range");
             }
+            else{
+                printf("Choose property to analyze:\n");
+                printf("1. Electronegativity\n2. Electron Affinity\n3. Atomic Radius\n");
+                printf("4. Melting Point\n5. Boiling Point\n6. Ionization Energy\n");
+                printf("Enter choice: ");
+                scanf("%d", &property_choice);
+            
+                int property_index = property_choice - 1;
+            
+                int count;
+                Element** elements = pt_get_elements_sorted_by_property(pt, start, end, &count, property_index);
+            
+                if (elements) {
+                    pt_analyze_trend(elements, count, property_index);
+                    free(elements);
+                } else {
+                    printf("Failed to analyze trend.\n");
+                }
+            }
+            
         }
         else if (choice == 6) {
             int start, end;
             printf("Enter range of atomic numbers (start end): ");
             scanf("%d %d", &start, &end);
             
-            pt_analyze_all_trends(pt, start, end);
+            if(start < 0 || start >118 || end<0 || end>118){
+                printf("Invalid Range");
+            }
+            else{
+                pt_analyze_all_trends(pt, start, end);
+            }
+            
         }
-        
+        else if (choice == 7) {
+            int start, end, property_choice, display_option;
+            printf("Enter range of atomic numbers (start end): ");
+            scanf("%d %d", &start, &end);
+
+            if(start < 0 || start >118 || end<0 || end>118){
+                printf("Invalid Range");
+            }
+            else{
+                printf("Choose property to plot:\n");
+                printf("1. Electronegativity\n2. Electron Affinity\n3. Atomic Radius\n");
+                printf("4. Melting Point\n5. Boiling Point\n6. Ionization Energy\n");
+                printf("Enter choice: ");
+                scanf("%d", &property_choice);
+                printf("Choose display option:\n");
+                printf("1. Display in pop-up window\n");
+                printf("2. Save as PNG file\n");
+                printf("Enter your choice (1 or 2): ");
+                scanf("%d", &display_option);
+            
+                int property_index = property_choice - 1;
+                int count;
+                Element** elements = pt_get_elements_sorted_by_property(pt, start, end, &count, property_index);
+            
+                if (elements) {
+                   plot_property(elements, count, display_option, property_index);
+                   free(elements);
+                } else {
+                    printf("Failed to plot trend.\n");
+                }
+            }
+            
+            
+        }
+
 
 
         else {
@@ -142,3 +188,4 @@ int main() {
     free_periodic_table(pt);
     return 0;
 }
+#endif
