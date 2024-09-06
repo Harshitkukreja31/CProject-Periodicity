@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -34,12 +33,12 @@ double get_property_value(Element* element, int property_index) {
 // Function to get property unit
 const char* get_property_unit(int property_index) {
     switch (property_index) {
-        case 0: return "Pauling scale";
-        case 1: return "kJ/mol";
+        case 0: return "Paulingscale";
+        case 1: return "kJ_mol";
         case 2: return "pm";
         case 3: return "K";
         case 4: return "K";
-        case 5: return "kJ/mol";
+        case 5: return "kJ_mol";
         default: return "";
     }
 }
@@ -63,6 +62,7 @@ void generate_data_file(Element** elements, int count, const char* filename, int
     
     fclose(fp);
 }
+
 // Function to generate gnuplot script
 void generate_gnuplot_script(const char* data_filename, const char* script_filename, const char* output_filename, int display_option, int property_index) {
     FILE* fp = fopen(script_filename, "w");
@@ -84,13 +84,11 @@ void generate_gnuplot_script(const char* data_filename, const char* script_filen
     fprintf(fp, "set xlabel 'Atomic Number'\n");
     fprintf(fp, "set ylabel '%s (%s)'\n", get_property_name_plot(property_index), get_property_unit(property_index));
     fprintf(fp, "set key outside\n");
-    fprintf(fp, "plot '%s' using 1:2:3 with points pt 7 ps 1.5 lc variable notitle, \\\n", data_filename);
-    fprintf(fp, "     '' using 1:2:3 with points pt 7 ps 1.5 lc variable title 'Available Data' if ($3==0), \\\n");
-    fprintf(fp, "     '' using 1:2:3 with points pt 7 ps 1.5 lc rgb 'red' title 'Unavailable Data' if ($3==1)\n");
+    fprintf(fp, "plot '%s' using 1:($3==0 ? $2 : 1/0):3 with points pt 7 ps 1.5 lc rgb 'black' title 'Available Data', \\\n", data_filename);
+    fprintf(fp, "     '' using 1:($3==1 ? $2 : 1/0):3 with points pt 7 ps 1.5 lc rgb 'red' title 'Unavailable Data'\n");
     
     fclose(fp);
 }
-
 // Function to execute gnuplot
 void execute_gnuplot(const char* script_filename) {
     char command[100];
