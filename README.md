@@ -142,5 +142,12 @@ Note: You may need to add the Gnuplot or MinGW or Visual Studio compiler to your
 
 The use of a hash table ensures that individual element lookups remain fast even as the dataset grows, making this implementation scalable and efficient for various applications in chemistry education and research.
 
+## Future Scope
+1. **GUI Implementation**: Develop a graphical user interface for more intuitive interaction with the periodic table and data visualization.
+2. **Extended Element Data**: Include more detailed information for each element, such as isotopes, discovery date, and common applications.
+3. **3D Visualization**: Implement 3D models of atomic structures and electron configurations.
+4. **Compound Predictor**: Add functionality to predict possible compounds based on selected elements and their properties.
+5. **Integration with External Databases**: Allow users to pull up-to-date element data from reputable online chemistry databases.
+
 
 
