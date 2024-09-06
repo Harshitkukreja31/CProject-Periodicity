@@ -34,6 +34,9 @@ static int compare_wrapper(const void* a, const void* b) {
 
 
 static Element** pt_get_elements_in_range(PeriodicTable* pt, int start, int end, int* count) {
+    if(start<0 || start>118 || end<0 || end>118){
+        return NULL;
+    }
     *count = 0;
     Element** elements = malloc(sizeof(Element*) * (end - start + 1));
     if (!elements) return NULL;
