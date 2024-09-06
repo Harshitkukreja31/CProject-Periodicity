@@ -69,17 +69,47 @@ project_root/
 - `Makefile`: Automates the build process.
 
 ## Getting Started
+
+### For Unix-like systems (Linux, macOS)
 1. Ensure you have a C compiler installed (e.g., GCC).
-2. Clone the repository to your local machine.
-3. Navigate to the project directory.
-4. Build the project using the Makefile:
+2. Install Gnuplot:
+   - For Ubuntu/Debian: `sudo apt-get install gnuplot`
+   - For macOS (using Homebrew): `brew install gnuplot`
+3. Clone the repository to your local machine.
+4. Navigate to the project directory.
+5. Build the project using the Makefile:
    ```
    make
    ```
-5. Run the compiled program:
+6. Run the compiled program:
    ```
    ./bin/periodic_table
    ```
+
+### For Windows
+1. Install a C compiler:
+   - Option 1: Install MinGW-w64 from [MinGW-w64 website](https://mingw-w64.org/doku.php/download)
+   - Option 2: Install Visual Studio Community Edition with "Desktop development with C++" workload
+2. Install Gnuplot:
+   - Download and install from the [Gnuplot website](http://www.gnuplot.info/download.html)
+3. Clone the repository to your local machine.
+4. Navigate to the project directory in Command Prompt or PowerShell.
+5. Compile the project:
+   - If using MinGW:
+     ```
+     gcc src\*.c -I include -o bin\periodic_table.exe
+     ```
+   - If using Visual Studio Developer Command Prompt:
+     ```
+     cl /I include src\*.c /Fe: bin\periodic_table.exe
+     ```
+6. Run the compiled program:
+   ```
+   bin\periodic_table.exe
+   ```
+
+Note: You may need to add the Gnuplot or MinGW or Visual Studio compiler to your system's PATH for the commands to work in any directory.
+
 
 ## Usage
 1. Upon running the program, you'll be presented with a menu of options.
